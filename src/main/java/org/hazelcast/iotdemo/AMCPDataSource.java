@@ -15,8 +15,6 @@ import java.util.concurrent.locks.LockSupport;
 
 public final class AMCPDataSource
 {
-    private static final int SOURCE_BUFFER_SIZE = 4;
-
     private static class AMCPParser
     {
         private final List<String> lines;
@@ -33,16 +31,9 @@ public final class AMCPDataSource
         public void fillBuffer(SourceBuilder.TimestampedSourceBuffer<DataPoint>
                 buffer)
         {
-            for (int i = 0; i < SOURCE_BUFFER_SIZE; i++) {
-                if (pos == lines.size( ))
-                    return;
-
-                DataPoint d = new DataPoint(lines.get(pos));
-                pos++;
-
-                if (d.isValid( ))
-                    buffer.add(d, d.getMessageTime( ));
-            }
+            DataPoint d = new DataPoint(lines.get(pos));
+            pos++;
+            buffer.add(d, d.getMessageTime( ));
 
             LockSupport.parkNanos(
                     TimeUnit.MILLISECONDS.toNanos(intervalTimeMsec));

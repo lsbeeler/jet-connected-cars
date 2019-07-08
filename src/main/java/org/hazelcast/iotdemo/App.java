@@ -18,9 +18,10 @@ public class App
 
         StreamStage<DataPoint> sourceStage = null;
         try {
-            sourceStage = p.drawFrom(
-                    AMCPDataSource.createSource(SAMPLE_DATA_CSV_FILE_PATH,
-                    true, 2_000)).withNativeTimestamps(10_000);
+            sourceStage = p.drawFrom(AMCPDataSource.createSource(
+                    SAMPLE_DATA_CSV_FILE_PATH, true, 500))
+                    .withNativeTimestamps(10_000)
+                    .filter(DataPoint::isValid);
         } catch (IOException e) {
             System.err.println("could not read data from input file " +
                     SAMPLE_DATA_CSV_FILE_PATH);
