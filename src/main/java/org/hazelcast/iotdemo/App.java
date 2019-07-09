@@ -35,17 +35,18 @@ public class App
         // all valid data points through whether they represent speed
         // violations or not such that all vehicle movements are reflected
         // on the map widget in the web dashboard
-        StreamStage<DataPoint> violationDetectionFork = sourceStage.filter(
-                DataPoint::isPolicyViolation);
+        StreamStage<DataPoint> violationDetectionFork = sourceStage;
         StreamStage<DataPoint> geolocationFork = sourceStage;
 
-        // Drain out the violations fork -- this goes to a file now, in the
-        // future, it will go to an IMap
+        // Handle the violations detection fork. This is the more complex of the
+        // the two. In the future, we'll drain it into an IMap that maps driver
+        // ids to violation counts, but for now, we'll just drain it to a file.
         violationDetectionFork
-                .groupingKey(DataPoint::getDriverId)
+                .map(DataPointPolicyWrapper::new)
+                .filter(DataPointPolicyWrapper::isPolicyViolation)
+                .groupingKey(wrapper -> wrapper.getDataPoint( ).getDriverId( ))
                 .rollingAggregate(AggregateOperations.counting( ))
                 .drainTo(Sinks.files("violations-out"));
-
 
         // Drain out the geolocation fork -- this goes to a file now, in the
         // future, it will go into a queue

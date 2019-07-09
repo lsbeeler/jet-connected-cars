@@ -9,13 +9,10 @@ import java.util.Objects;
 
 public final class DataPoint implements Serializable
 {
-    private static final double POLICY_VIOLATION_THRESHOLD_MPH = 45.0;
-
     private int driverId;
     private long messageTime;
     private boolean valid;
     private double speed;
-    private boolean policyViolation;
     private double longitude;
     private double latitude;
 
@@ -40,8 +37,6 @@ public final class DataPoint implements Serializable
             this.longitude = Double.parseDouble(features[6]);
 
             valid = true;
-
-            policyViolation = speed > POLICY_VIOLATION_THRESHOLD_MPH;
         } catch (Throwable t) {
             // Catch a NumberFormatException or any other unchecked exception
             // which might be thrown during data parsing (the data isn't
@@ -60,11 +55,6 @@ public final class DataPoint implements Serializable
     public long getMessageTime( )
     {
         return messageTime;
-    }
-
-    public boolean isPolicyViolation( )
-    {
-        return policyViolation;
     }
 
     public int getDriverId( )
@@ -95,7 +85,6 @@ public final class DataPoint implements Serializable
                 ", messageTime=" + messageTime +
                 ", valid=" + valid +
                 ", speed=" + speed +
-                ", policyViolation=" + policyViolation +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 '}';
@@ -111,7 +100,6 @@ public final class DataPoint implements Serializable
                 messageTime == dataPoint.messageTime &&
                 valid == dataPoint.valid &&
                 Double.compare(dataPoint.speed, speed) == 0 &&
-                policyViolation == dataPoint.policyViolation &&
                 Double.compare(dataPoint.longitude, longitude) == 0 &&
                 Double.compare(dataPoint.latitude, latitude) == 0;
     }
@@ -120,7 +108,6 @@ public final class DataPoint implements Serializable
     public int hashCode( )
     {
         return Objects.hash(driverId, messageTime, valid, speed,
-                policyViolation,
                 longitude, latitude);
     }
 }
