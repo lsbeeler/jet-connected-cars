@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/iotdemo.iws" beforeDir="false" afterPath="$PROJECT_DIR$/iotdemo.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/AMCPDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/AMCPDataSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/DataPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/DataPoint.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+            <state relative-caret-position="502">
+              <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/DataPoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="89" column="18" selection-start-line="89" selection-start-column="18" selection-end-line="89" selection-end-column="18" />
+            <state relative-caret-position="198">
+              <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/AMCPDataSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+            <state relative-caret-position="1224">
+              <caret line="68" selection-start-line="66" selection-end-line="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,8 +73,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/DataPoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/AMCPDataSource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/DataPoint.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/App.java" />
       </list>
     </option>
@@ -98,11 +99,6 @@
               <item name="iotdemo" type="b2602c69:ProjectViewProjectNode" />
               <item name="jet-connected-cars" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="iotdemo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jet-connected-cars" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -112,6 +108,9 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -162,25 +161,33 @@
       <workItem from="1561937672034" duration="52000" />
       <workItem from="1561937735858" duration="1077000" />
       <workItem from="1562397114474" duration="222000" />
-      <workItem from="1562624355892" duration="1659000" />
+      <workItem from="1562624355892" duration="7440000" />
     </task>
+    <task id="LOCAL-00001" summary="Removes all batching of the input. Moves filtering of invalid data points from the data source to a stream stage. Together, these changes make the system more &quot;streamy.&quot;">
+      <created>1562626171425</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1562626171425</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13092000" />
+    <option name="totallyTimeSpent" value="18873000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="14" y="36" width="1730" height="1389" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23992892" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23992892" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32690826" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32690826" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -203,14 +210,11 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Removes all batching of the input. Moves filtering of invalid data points from the data source to a stream stage. Together, these changes make the system more &quot;streamy.&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removes all batching of the input. Moves filtering of invalid data points from the data source to a stream stage. Together, these changes make the system more &quot;streamy.&quot;" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/AMCP-Probe-Data.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/hazelcast/jet/hazelcast-jet/3.1/hazelcast-jet-3.1.jar!/com/hazelcast/jet/impl/util/Util.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
@@ -218,30 +222,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/AMCPDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/data/AMCP-Probe-Data.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="116172">
+          <caret line="6454" column="32" selection-start-line="6454" selection-start-column="19" selection-end-line="6454" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/DataPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="89" column="18" selection-start-line="89" selection-start-column="18" selection-end-line="89" selection-end-column="18" />
+        <state relative-caret-position="198">
+          <caret line="11" column="66" selection-start-line="11" selection-start-column="66" selection-end-line="11" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/AMCPDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1224">
+          <caret line="68" selection-start-line="66" selection-end-line="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/violations-out/0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coordinates-out/0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/hazelcast/iotdemo/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
+        <state relative-caret-position="502">
+          <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

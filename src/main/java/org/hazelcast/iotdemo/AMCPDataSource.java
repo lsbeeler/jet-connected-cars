@@ -17,9 +17,13 @@ public final class AMCPDataSource
 {
     private static class AMCPParser
     {
+        private static final long TIMESTAMP_SHIFT_PER_REPLAY = 15_000_000;
+
         private final List<String> lines;
         private int pos;
         private long intervalTimeMsec;
+        private long timestampShiftMultipler = 0;
+        private DataPoint lastDataPoint = null;
 
         public AMCPParser(List<String> csvLines, long intervalTimeMsec)
         {
@@ -31,9 +35,34 @@ public final class AMCPDataSource
         public void fillBuffer(SourceBuilder.TimestampedSourceBuffer<DataPoint>
                 buffer)
         {
+            // The three lines below enable "auto-replay" functionality: they
+            // allow the simulation to run forever by resetting all vehicles
+            // to their starting positions and beginning the simulation again.
+            // If this functionality is not desired, remove these lines.
+            if (pos == lines.size( )) {
+                pos = 0;
+                timestampShiftMultipler++;
+            }
+
             DataPoint d = new DataPoint(lines.get(pos));
+
+            // One issue with the AMCP data set is that we don't actually care
+            // about all of the features in the data set -- we only care about
+            // driver id, speed, and position. The AMCP data set contains many
+            // lines, however that capture features other than the ones we
+            // care about at the same time points, and sometimes two
+            // subsequent lines can produce an equal data point from our
+            // perspective, even though they're distinct from the AMCP
+            // perspective. We deal with this problem by only adding points to
+            // the buffer that our distinct from the previous data point
+            if (!d.equals(lastDataPoint)) {
+                long timestamp = d.getMessageTime( ) + timestampShiftMultipler *
+                        TIMESTAMP_SHIFT_PER_REPLAY;
+                buffer.add(d, timestamp);
+                lastDataPoint = d;
+            }
+
             pos++;
-            buffer.add(d, d.getMessageTime( ));
 
             LockSupport.parkNanos(
                     TimeUnit.MILLISECONDS.toNanos(intervalTimeMsec));

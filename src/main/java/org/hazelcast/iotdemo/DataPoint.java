@@ -4,6 +4,7 @@ package org.hazelcast.iotdemo;
 import com.sun.istack.internal.NotNull;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 
 public final class DataPoint implements Serializable
@@ -98,5 +99,28 @@ public final class DataPoint implements Serializable
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass( ) != o.getClass( )) return false;
+        DataPoint dataPoint = (DataPoint) o;
+        return driverId == dataPoint.driverId &&
+                messageTime == dataPoint.messageTime &&
+                valid == dataPoint.valid &&
+                Double.compare(dataPoint.speed, speed) == 0 &&
+                policyViolation == dataPoint.policyViolation &&
+                Double.compare(dataPoint.longitude, longitude) == 0 &&
+                Double.compare(dataPoint.latitude, latitude) == 0;
+    }
+
+    @Override
+    public int hashCode( )
+    {
+        return Objects.hash(driverId, messageTime, valid, speed,
+                policyViolation,
+                longitude, latitude);
     }
 }
