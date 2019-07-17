@@ -4,14 +4,19 @@ package org.hazelcast.iotdemo;
 import com.hazelcast.jet.Jet;
 import com.hazelcast.jet.JetInstance;
 import com.hazelcast.jet.aggregate.AggregateOperations;
-import com.hazelcast.jet.pipeline.*;
+import com.hazelcast.jet.pipeline.Pipeline;
+import com.hazelcast.jet.pipeline.Sinks;
+import com.hazelcast.jet.pipeline.StreamStage;
 
 import java.io.IOException;
+
 
 public class App
 {
     private static final String SAMPLE_DATA_CSV_FILE_PATH =
             "data/AMCP-Probe-Data.csv";
+    private static final String VIOLATIONS_MAP = "violations-map";
+    private static final String COORDINATES_MAP = "coords-map";
 
     public static void main(String[ ] args)
     {
@@ -39,20 +44,24 @@ public class App
         StreamStage<DataPoint> geolocationFork = sourceStage;
 
         // Handle the violations detection fork. This is the more complex of the
-        // the two. In the future, we'll drain it into an IMap that maps driver
-        // ids to violation counts, but for now, we'll just drain it to a file.
+        // the two.
         violationDetectionFork
                 .map(DataPointPolicyWrapper::new)
                 .filter(DataPointPolicyWrapper::isPolicyViolation)
                 .groupingKey(wrapper -> wrapper.getDataPoint( ).getDriverId( ))
                 .rollingAggregate(AggregateOperations.counting( ))
-                .drainTo(Sinks.files("violations-out"));
+                .drainTo(Sinks.map(VIOLATIONS_MAP));
 
-        // Drain out the geolocation fork -- this goes to a file now, in the
-        // future, it will go into a queue
-        geolocationFork.drainTo(Sinks.files("coordinates-out"));
+        // Handle the geolocation fork
+        geolocationFork
+                .map(pt -> new GeolocationEntry(pt.getDriverId( ),
+                        new GeolocationCoordinates(pt)))
+                .drainTo(Sinks.map(COORDINATES_MAP));
 
         JetInstance jet = Jet.newJetInstance( );
+
+        MapDumper.start(
+                jet.getHazelcastInstance( ).getMap(COORDINATES_MAP));
         try {
             jet.newJob(p).join( );
         } finally {
